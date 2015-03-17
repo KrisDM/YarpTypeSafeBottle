@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="TestBottles.xslt"?>
+<!-- Copyright: (C) 2015 King's College London -->
+<!-- Authors: Kris De Meyer -->
+<!-- CopyPolicy: Released under the terms of the GNU GPL v2.0 -->
+<Bottles xmlns="http://darwin-project.eu/namespaces/TypeSafeBottle" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://darwin-project.eu/namespaces/TypeSafeBottle TestBottles.xsd">
+	<Namespace name="darwin">
+		<Namespace name="msg">
+			<Namespace name="test"/>
+		</Namespace>
+	</Namespace>
+	<Struct className="Pair">
+		<Variable name="Name" type="string"/>
+		<Variable name="Value" type="int"/>
+	</Struct>
+	<Struct className="Trio">
+		<Variable name="anInt" type="int"/>
+		<Variable name="aDouble" type="double"/>
+		<Variable name="aString" type="string"/>
+	</Struct>
+  <Struct className="Composite">
+    <Variable name="pair" type="Pair"/>
+    <Variable name="trio" type="Trio"/>
+    <Vector name="morepairs" valueType="Pair"/>
+  </Struct>
+	<Vector valueType="Pair" className="PairVector"/>
+  <Vector valueType="Composite" className="CompositeVector"/>
+	<Struct className="Everything">
+    <Variable name="aVocab" type="vocab"/>
+		<Variable name="aPair" type="Pair"/>
+		<Variable name="aTrio" type="Trio"/>
+		<Vector name="anIntVector" valueType="int"/>
+		<Vector name="aDoubleVector" valueType="double"/>
+		<Vector name="aStringVector" valueType="string"/>
+		<Vector name="aVocabVector" valueType="vocab"/>
+		<Variable name="aPairVector" type="PairVector"/>
+		<Variable name="anEverythingVector" type="EverythingVector"/>
+		<Vector name="anotherPairVector" valueType="Pair"/>
+		<Vector name="anotherEverythingVector" valueType="Everything"/>
+	</Struct>
+	<Vector valueType="Everything" className="EverythingVector"/>
+	<Wrapper className="Anything">
+		<Bottle subID="pair" valueType="Pair"/>
+		<Bottle subID="trio" valueType="Trio"/>
+		<Bottle subID="all" valueType="Everything"/>
+	</Wrapper>
+    <Struct className="Point2D"> 
+   <!--each name bust be unique within this Struct-->
+   <!--double is a builtin type-->
+   <Variable name="x" type="double"/> 
+   <Variable name="y" type="double"/> 
+</Struct>
+<Struct className="Circle">
+   <!--a class can contain variables from another class-->
+   <Variable name="Center" type="Point2D"/> 
+   <!--int is another builtin type-->
+   <Variable name="Radius" type="int"/> 
+</Struct>
+<!--a vector of arbitrary length of Point2D elements-->
+<Vector className="Polygon" valueType="Point2D"/> 
+<!--Wrap either a Circle OR a Polygon element into another message-->
+<Wrapper className="Shape"> 
+   <!--each subID is a string from length 1-4, unique within this Wrapper-->
+   <!--it defines the type of the content of the message-->
+   <Bottle subID="circ" valueType="Circle"/> 
+   <Bottle subID="poly" valueType="Polygon"/> 
+</Wrapper>
+</Bottles>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="TestMessages.xslt"?>
+<!-- Copyright: (C) 2013 The Darwin Consortium -->
+<!-- CopyPolicy: Released under the terms of the LGPLv2.1 or later -->
+<Bottles xmlns="http://darwin-project.eu/namespaces/TypeSafeBottle" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://darwin-project.eu/namespaces/TypeSafeBottle TestMessages.xsd">
+	<Namespace name="darwin">
+		<Namespace name="msg">
+			<Namespace name="test"/>
+		</Namespace>
+	</Namespace>
+	<Dictionary className="TestDictionary">
+		<Vocab value="o"/>
+		<Vocab value="tw"/>
+		<Vocab value="thr"/>
+		<Vocab value="four"/>
+	</Dictionary>
+	<Dictionary className="AnotherTestDictionary">
+		<Vocab value="one"/>
+		<Vocab value="two"/>
+	</Dictionary>
+	<Struct className="TestIntStruct">
+		<Variable name="anInt" type="int"/>
+	</Struct>
+	<Struct className="TestDoubleStruct">
+		<Variable name="aDouble" type="double"/>
+	</Struct>
+	<Struct className="TestStringStruct">
+		<Variable name="aString" type="string"/>
+	</Struct>
+	<Struct className="TestVocabStruct">
+		<Variable name="aVocab" type="vocab"/>
+	</Struct>
+	<Struct className="TestDictionaryStruct">
+		<Variable name="anEntry" type="TestDictionary"/>
+	</Struct>
+	<Struct className="TestStructStruct">
+		<Variable name="aStruct" type="TestIntStruct"/>
+	</Struct>
+	<Struct className="TestRecursiveVectorStruct">
+		<Vector name="recursive" valueType="TestRecursiveVectorStruct"/>
+	</Struct>
+  <!--These are specific case to test for an error in the xslt-->
+  <!--className is part of a builtin type (double)-->
+  <Struct className="doub">
+    <Variable name="anInt" type="int"/>
+  </Struct>
+  <!--className is part of the Dictionary className-->
+  <Struct className="AnotherTest">
+    <Variable name="aValue" type="AnotherTestDictionary"/>
+    <Variable name="aDoub" type="doub"/>
+  </Struct>
+	<Vector className="TestIntVector" valueType="int"/>
+	<Vector className="TestDoubleVector" valueType="double"/>
+	<Vector className="TestStringVector" valueType="string"/>
+	<Vector className="TestVocabVector" valueType="vocab"/>
+	<Vector className="TestDictionaryVector" valueType="AnotherTestDictionary"/>
+	<Vector className="TestStructVector" valueType="TestStructStruct"/>
+	<Struct className="TestVectorStruct">
+		<Vector valueType="int" name="anIntVector"/>
+		<Vector valueType="double" name="aDoubleVector"/>
+		<Vector valueType="string" name="aStringVector"/>
+		<Vector valueType="vocab" name="aVocabVector"/>
+		<Vector valueType="TestDictionary" name="aDictionaryVector"/>
+		<Vector valueType="TestDictionaryStruct" name="aDictionaryStructVector"/>
+	</Struct>
+	<Wrapper className="TestWrapper">
+		<Bottle subID="is" valueType="TestIntStruct"/>
+		<Bottle subID="iv" valueType="TestIntVector"/>
+		<Bottle subID="dv" valueType="TestDictionaryVector"/>
+		<Bottle subID="tw" valueType="TestWrapper"/>
+	</Wrapper>
+</Bottles>

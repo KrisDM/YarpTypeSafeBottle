@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="DocumentationExamples.xslt"?>
+<!-- Copyright: (C) 2013 The Darwin Consortium -->
+<!-- CopyPolicy: Released under the terms of the LGPLv2.1 or later -->
+<Bottles xmlns="http://darwin-project.eu/namespaces/TypeSafeBottle" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://darwin-project.eu/namespaces/TypeSafeBottle DocumentationExamples.xsd">	
+<!--each className must be a unique identifier within the whole document-->
+<Struct className="Point2D"> 
+   <!--each name bust be unique within this Struct-->
+   <!--double is a builtin type-->
+   <Variable name="x" type="double"/> 
+   <Variable name="y" type="double"/> 
+</Struct>
+<Struct className="Circle">
+   <!--a class can contain variables from another class-->
+   <Variable name="Center" type="Point2D"/> 
+   <!--int is another builtin type-->
+   <Variable name="Radius" type="int"/> 
+</Struct>
+<!--a vector of arbitrary length of Point2D elements-->
+<Vector className="Polygon" valueType="Point2D"/> 
+<!--Wrap either a Circle OR a Polygon element into another message-->
+<Wrapper className="Shape"> 
+   <!--each subID is a string from length 1-4, unique within this Wrapper-->
+   <!--it defines the type of the content of the message-->
+   <Bottle subID="circ" valueType="Circle"/> 
+   <Bottle subID="poly" valueType="Polygon"/> 
+</Wrapper>
+</Bottles>

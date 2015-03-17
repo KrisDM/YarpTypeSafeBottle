@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="TestBottles.xslt"?>
+<!-- Copyright: (C) 2013 King's College London -->
+<!-- Authors: Kris De Meyer -->
+<!-- CopyPolicy: Released under the terms of the LGPLv2.1 or later -->
+<Bottles xmlns="http://darwin-project.eu/namespaces/TypeSafeBottle" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://darwin-project.eu/namespaces/TypeSafeBottle TestBottles.xsd">
+	<Namespace name="darwin">
+		<Namespace name="msg">
+			<Namespace name="test"/>
+		</Namespace>
+	</Namespace>
+	<Struct className="Pair">
+		<Variable name="Name" type="string"/>
+		<Variable name="Value" type="int"/>
+	</Struct>
+	<Struct className="Trio">
+		<Variable name="anInt" type="int"/>
+		<Variable name="aDouble" type="double"/>
+		<Variable name="aString" type="string"/>
+	</Struct>
+  <Struct className="Composite">
+    <Variable name="pair" type="Pair"/>
+    <Variable name="trio" type="Trio"/>
+    <Vector name="morepairs" valueType="Pair"/>
+  </Struct>
+	<Vector valueType="Pair" className="PairVector"/>
+  <Vector valueType="Composite" className="CompositeVector"/>
+	<Struct className="Everything">
+    <Variable name="aVocab" type="vocab"/>
+		<Variable name="aPair" type="Pair"/>
+		<Variable name="aTrio" type="Trio"/>
+		<Vector name="anIntVector" valueType="int"/>
+		<Vector name="aDoubleVector" valueType="double"/>
+		<Vector name="aStringVector" valueType="string"/>
+		<Vector name="aVocabVector" valueType="vocab"/>
+		<Variable name="aPairVector" type="PairVector"/>
+		<Variable name="anEverythingVector" type="EverythingVector"/>
+		<Vector name="anotherPairVector" valueType="Pair"/>
+		<Vector name="anotherEverythingVector" valueType="Everything"/>
+	</Struct>
+	<Vector valueType="Everything" className="EverythingVector"/>
+	<Wrapper className="Anything">
+		<Bottle subID="pair" valueType="Pair"/>
+		<Bottle subID="trio" valueType="Trio"/>
+		<Bottle subID="all" valueType="Everything"/>
+	</Wrapper>
+  <Vector valueType="vocab" className="RobotCommand"/>
+</Bottles>
